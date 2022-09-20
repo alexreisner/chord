@@ -3,8 +3,24 @@ require 'httparty'
 module Chord
 
   class << self
-    attr_writer :env
-    def env; @env || :staging; end # :staging by default
+    attr_accessor :base_url
+    attr_accessor :api_key
+
+    def config(options)
+      self.base_url = options[:base_url]
+      self.api_key = options[:api_key]
+    end
+
+    def config_from_file(filepath)
+      if File.exist?(filepath)
+        require 'yaml'
+        config = YAML.load(File.read(filepath), symbolize_names: true)
+        Chord.config(
+          base_url: config[:base_url],
+          api_key: config[:api_key]
+        )
+      end
+    end
   end
 
   class Base
@@ -35,12 +51,12 @@ module Chord
       end
 
       def base_url
-        CHORD_API_CONFIG[Chord.env][:base_url]
+        Chord.base_url
       end
 
       def http_options
         {headers: {
-          'Authorization' => "Bearer #{CHORD_API_CONFIG[Chord.env][:api_key]}",
+          'Authorization' => "Bearer #{Chord.api_key}",
           'Content-Type' => 'application/json'
         }}
       end

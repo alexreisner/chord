@@ -2,16 +2,10 @@
 
 These classes provide simple read and write access to the Chord OMS API. Get started like this:
 
-    CHORD_API_CONFIG = {
-      staging: {
-        base_url: 'https://<customer>.staging.assembly-api.com/api/',
-        api_key: '<key>'
-      },
-      production: {
-        base_url: 'https://<customer>.assembly-api.com/api/',
-        api_key: '<key>'
-      }
-    }
+    Chord.config(
+      base_url: 'https://<customer>.staging.assembly-api.com/api/',
+      api_key: '<key>'
+    )
 
     u = Chord::User.find(1)                   # fetch user
     u.attributes                              # see attributes hash

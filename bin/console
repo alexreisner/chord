@@ -3,10 +3,7 @@
 require 'bundler/setup'
 require 'chord'
 
-if File.exist?('config.yml')
-  require 'yaml'
-  CHORD_API_CONFIG = YAML.load(File.read('config.yml'), symbolize_names: true)
-end
+Chord.config_from_file('config.yml')
 
 require 'irb'
 IRB.start
