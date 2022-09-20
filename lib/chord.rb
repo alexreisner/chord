@@ -19,6 +19,7 @@ module Chord
       end
 
       def find(id)
+        return nil if id.nil? or id == ''
         attrs = get(base_url + "#{base_path}/#{id}", http_options).parsed_response
         attrs.include?('error') ? nil : new(id, attrs)
       end
