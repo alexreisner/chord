@@ -192,6 +192,14 @@ module Chord
         http_options.merge(body: attributes.to_json)
       ).parsed_response
     end
+
+    def subscription_installment?
+      channel == 'subscriptions'
+    end
+
+    def subscription_start?
+      subscription_in_cart
+    end
   end
 
 
