@@ -45,20 +45,24 @@ module Chord
       def per_page; 99999; end
 
       def all
+        check_for_config!
         @all ||= fetch_all_data[base_path].map{ |i| new(i[id_attribute], i) }
       end
 
       def where(query_options = {})
+        check_for_config!
         fetch_all_data(query_options)[base_path].map{ |i| new(i[id_attribute], i) }
       end
 
       def find(id)
+        check_for_config!
         return nil if id.nil? or id == ''
         attrs = fetch_attributes(id)
         attrs.include?('error') ? nil : new(attrs[id_attribute], attrs)
       end
 
       def fetch_attributes(id)
+        check_for_config!
         get(base_url + "#{base_path}/#{id}", http_options).parsed_response
       end
 
@@ -67,6 +71,7 @@ module Chord
       end
 
       def fetch_all_data(query_options = {})
+        check_for_config!
         query_options = { per_page: per_page }.merge(query_options)
         url = base_url + base_path + '?' + hash_to_query(query_options)
         get(url, http_options).parsed_response
@@ -84,6 +89,12 @@ module Chord
       end
 
       private # --------------------------------------------------------------
+
+      def check_for_config!
+        if Chord.base_url.nil? or Chord.api_key.nil?
+          raise ConfigurationError, 'Please configure Chord by calling Chord.config(base_url: ..., api_key: ...)'
+        end
+      end
 
       def hash_to_query(hash)
         require 'cgi' unless defined?(CGI) && defined?(CGI.escape)
@@ -265,5 +276,8 @@ module Chord
     def self.base_path
       'products'
     end
+  end
+
+  class ConfigurationError < StandardError
   end
 end
