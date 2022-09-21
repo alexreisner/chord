@@ -20,9 +20,10 @@ These classes provide simple read and write access to the Chord OMS API. Get sta
 
 Objects are constructed in a way that minimizes API calls but occasionally yields objects that seem incomplete. For example:
 
-    u = Chord::User.find(44)
-    s = u.subscriptions.first
-    s.user
+    orders = Chord::Order.all
+    o = orders.first
 
-will return a Chord::User object with only two attributes (ID and email) because the API only returns two attributes with a Subscription object.
+will return a Chord::Order object with around 40 attributes, not the full set of 55 (it's missing line items, for example), because the `/orders` endpoint returns abbreviated objects. To load the full set of data for these objects, use the `expand!` method:
+
+    o.expand!
 

@@ -24,4 +24,12 @@ class ModelTest < ChordTestCase
     orders = Chord::Order.where('q[completed_at_gt]' => '2022-09-19')
     assert_equal 'COMMONS-', orders.first.id[0...8]
   end
+
+  def test_order_expand!
+    orders = Chord::Order.where('q[completed_at_gt]' => '2022-09-19')
+    o = orders.first
+    assert !o.attributes.include?('line_items')
+    o.expand!
+    assert o.attributes.include?('line_items')
+  end
 end

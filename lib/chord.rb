@@ -40,8 +40,12 @@ module Chord
 
       def find(id)
         return nil if id.nil? or id == ''
-        attrs = get(base_url + "#{base_path}/#{id}", http_options).parsed_response
+        attrs = fetch_attributes(id)
         attrs.include?('error') ? nil : new(attrs[id_attribute], attrs)
+      end
+
+      def fetch_attributes(id)
+        get(base_url + "#{base_path}/#{id}", http_options).parsed_response
       end
 
       def id_attribute
@@ -111,6 +115,13 @@ module Chord
 
     def delete
       self.class.delete(base_url + "#{base_path}/#{id}", http_options).parsed_response
+    end
+
+    # fetch all attributes, but don't overwrite existing ones,
+    # in case changes have been made
+    def expand!
+      all_attributes = self.class.fetch_attributes(id)
+      @attributes = all_attributes.merge(@attributes)
     end
 
     def method_missing(method, *args, &block)
@@ -206,9 +217,7 @@ module Chord
     end
 
     def subscription_start?
-      unless attributes.include?('subscription_in_cart')
-        attributes['subscription_in_cart'] = Chord::Order.find(number).subscription_in_cart
-      end
+      expand! unless attributes.include?('subscription_in_cart')
       subscription_in_cart
     end
   end
