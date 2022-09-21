@@ -5,6 +5,7 @@ group :development, :test do
   gem 'httparty'
   gem 'activerecord'
   gem 'test-unit'
+  gem 'byebug'
 end
 
 gemspec
