@@ -228,6 +228,10 @@ module Chord
     def self.base_path
       'roles'
     end
+
+    def users
+      attributes['users'].map{ |u| Chord::User.new(u['id'], u) }
+    end
   end
 
 

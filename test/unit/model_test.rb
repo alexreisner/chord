@@ -32,4 +32,9 @@ class ModelTest < ChordTestCase
     o.expand!
     assert o.attributes.include?('line_items')
   end
+
+  def test_role_users_returns_objects
+    r = Chord::Role.find(3)
+    assert_instance_of Chord::User, r.users.first
+  end
 end
