@@ -28,7 +28,7 @@ module Chord
 
     class << self
       attr_writer :per_page
-      def per_page; @per_page || 99999; end
+      def per_page; 99999; end
 
       def all
         @all ||= fetch_all_data[base_path].map{ |i| new(i[id_attribute], i) }
