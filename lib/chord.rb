@@ -19,6 +19,20 @@ module Chord
           base_url: config[:base_url],
           api_key: config[:api_key]
         )
+      else
+        false
+      end
+    end
+
+    def config_from_env
+      if ENV['CHORD_BASE_URL'] or ENV['CHORD_API_KEY']
+        Chord.config(
+          base_url: ENV['CHORD_BASE_URL'],
+          api_key: ENV['CHORD_API_KEY']
+        )
+        true
+      else
+        false
       end
     end
   end
