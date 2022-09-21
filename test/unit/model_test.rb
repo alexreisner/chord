@@ -17,4 +17,11 @@ class ModelTest < ChordTestCase
     assert !Chord::Order.find('COMMONS-758805215').subscription_start?
     assert !Chord::Order.find('COMMONS-244796031').subscription_start?
   end
+
+  def test_order_uses_number_as_id
+    o = Chord::Order.find('COMMONS-301873119')
+    assert_equal 'COMMONS-301873119', o.id
+    orders = Chord::Order.where('q[completed_at_gt]' => '2022-09-19')
+    assert_equal 'COMMONS-', orders.first.id[0...8]
+  end
 end
