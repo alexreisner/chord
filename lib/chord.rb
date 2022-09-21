@@ -176,7 +176,7 @@ module Chord
     end
 
     def user
-      Chord::User.find(attributes['user_id'])
+      @user ||= Chord::User.find(attributes['user_id'])
     end
 
     def payments
