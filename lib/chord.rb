@@ -31,24 +31,24 @@ module Chord
       def per_page; 99999; end
 
       def all
-        @all ||= fetch_all_data[base_path].map{ |i| new(i[primary_key], i) }
+        @all ||= fetch_all_data[base_path].map{ |i| new(i[id_attribute], i) }
       end
 
       def where(query_options = {})
-        fetch_all_data(query_options)[base_path].map{ |i| new(i[primary_key], i) }
+        fetch_all_data(query_options)[base_path].map{ |i| new(i[id_attribute], i) }
       end
 
       def find(id)
         return nil if id.nil? or id == ''
         attrs = fetch_attributes(id)
-        attrs.include?('error') ? nil : new(attrs[primary_key], attrs)
+        attrs.include?('error') ? nil : new(attrs[id_attribute], attrs)
       end
 
       def fetch_attributes(id)
         get(base_url + "#{base_path}/#{id}", http_options).parsed_response
       end
 
-      def primary_key
+      def id_attribute
         'id'
       end
 
@@ -190,7 +190,7 @@ module Chord
       'orders'
     end
 
-    def self.primary_key
+    def self.id_attribute
       'number'
     end
 
