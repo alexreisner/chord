@@ -179,7 +179,7 @@ module Chord
       'orders'
     end
 
-    def id_attribute
+    def self.id_attribute
       'number'
     end
 
