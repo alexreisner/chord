@@ -7,8 +7,8 @@ module Chord
     attr_accessor :api_key
 
     def config(options)
-      self.base_url = options[:base_url]
-      self.api_key = options[:api_key]
+      self.base_url = options[:base_url] if options[:base_url]
+      self.api_key = options[:api_key] if options[:api_key]
     end
 
     def config_from_file(filepath)
