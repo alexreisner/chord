@@ -198,6 +198,9 @@ module Chord
     end
 
     def subscription_start?
+      unless attributes.include?('subscription_in_cart')
+        attributes['subscription_in_cart'] = Chord::Order.find(number).subscription_in_cart
+      end
       subscription_in_cart
     end
   end
