@@ -2,6 +2,11 @@
 
 Major changes for each release. Please see the Git log for complete list of changes.
 
+## 0.0.6
+
+* Return User objects from Role#users.
+* Add config methods.
+
 ## 0.0.5
 
 * Add expand! method.
