@@ -5,7 +5,7 @@ require 'chord/version'
 
 Gem::Specification.new do |s|
   s.name        = "chord"
-  s.required_ruby_version = '>= 2.5.0' # when Hash#transform_keys added
+  s.required_ruby_version = '>= 2.0.0'
   s.version     = Chord::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Alex Reisner"]
