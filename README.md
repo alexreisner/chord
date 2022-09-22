@@ -14,10 +14,6 @@ These classes provide simple read and write access to the Chord OMS API. Get sta
     u.add_role(3)                             # add role (by ID) to the user
     u.remove_role(3)                          # remove role (by ID) from the user
     u.subscriptions                           # fetch the user's subscriptions
-    u.update(metadata: {legacy_id: 415})      # when updating 'metadata' attribute, the given
-                                              # hash is merged into the existing value and
-                                              # keys and values are stringified (since
-                                              # metadata is stored in OMS as a JSON string)
 
     o = Chord::Order.find(1)                  # fetch order
     o.subscription_installment?               # was the order a subscription installment?

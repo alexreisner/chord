@@ -125,14 +125,6 @@ module Chord
     end
 
     def update(new_attributes)
-      new_attributes.transform_keys!(&:to_s)
-      # merge values into existing metadata
-      if new_attributes.include?('metadata')
-        # Chord expects all metadata values to be strings
-        new_metadata = new_attributes['metadata'].map{ |k,v| [k.to_s, v.to_s] }.to_h
-        new_attributes['metadata'] = (attributes['metadata'] || {}).merge(new_metadata)
-        # TODO: delete entries with empty value?
-      end
       self.attributes = self.class.patch(base_url + "#{base_path}/#{id}",
         http_options.merge(body: new_attributes.to_json)
       ).parsed_response
