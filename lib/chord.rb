@@ -61,22 +61,6 @@ module Chord
         attrs.include?('error') ? nil : new(attrs[id_attribute], attrs)
       end
 
-      def fetch_attributes(id)
-        check_for_config!
-        get(base_url + "#{base_path}/#{id}", http_options).parsed_response
-      end
-
-      def id_attribute
-        'id'
-      end
-
-      def fetch_all_data(query_options = {})
-        check_for_config!
-        query_options = { per_page: per_page }.merge(query_options)
-        url = base_url + base_path + '?' + hash_to_query(query_options)
-        get(url, http_options).parsed_response
-      end
-
       def base_url
         Chord.base_url
       end
@@ -89,6 +73,22 @@ module Chord
       end
 
       private # --------------------------------------------------------------
+
+      def id_attribute
+        'id'
+      end
+
+      def fetch_attributes(id)
+        check_for_config!
+        get(base_url + "#{base_path}/#{id}", http_options).parsed_response
+      end
+
+      def fetch_all_data(query_options = {})
+        check_for_config!
+        query_options = { per_page: per_page }.merge(query_options)
+        url = base_url + base_path + '?' + hash_to_query(query_options)
+        get(url, http_options).parsed_response
+      end
 
       def check_for_config!
         if Chord.base_url.nil? or Chord.api_key.nil?
@@ -145,7 +145,7 @@ module Chord
     # fetch all attributes, but don't overwrite existing ones,
     # in case changes have been made
     def expand!
-      all_attributes = self.class.fetch_attributes(id)
+      all_attributes = self.class.send(:fetch_attributes, id)
       @attributes = all_attributes.merge(@attributes)
     end
 
