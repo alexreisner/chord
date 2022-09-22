@@ -2,6 +2,12 @@
 
 Major changes for each release. Please see the Git log for complete list of changes.
 
+## 0.0.7
+
+* Remove ActiveRecord dependency.
+* Make some methods private.
+* Raise APIError when no data returned.
+
 ## 0.0.6
 
 * Return User objects from Role#users.
