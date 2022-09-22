@@ -32,7 +32,7 @@ You can also filter and sort, though the parameters are not well documented:
 
     Chord::Order.where(
       'q[completed_at_gt]' => '2022-09-14',
-       'q[s]' => 'completed_at desc'
+      'q[s]' => 'completed_at desc'
     )
 
 
