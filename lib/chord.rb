@@ -183,6 +183,10 @@ module Chord
       'users'
     end
 
+    def orders
+      Order.where('q[user_id_eq]' => id)
+    end
+
     def add_role(role_id)
       self.class.put(base_url + "roles/#{role_id}/add/#{id}", http_options).parsed_response
     end

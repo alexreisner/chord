@@ -13,6 +13,7 @@ These classes provide simple read and write access to the Chord OMS API. Get sta
     u.update(name: 'Joe Smith', notes: 'Etc') # update attributes
     u.add_role(3)                             # add role (by ID) to the user
     u.remove_role(3)                          # remove role (by ID) from the user
+    u.orders                                  # fetch the user's orders
     u.subscriptions                           # fetch the user's subscriptions
 
     o = Chord::Order.find(1)                  # fetch order
