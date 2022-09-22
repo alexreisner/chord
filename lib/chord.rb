@@ -80,14 +80,14 @@ module Chord
 
       def fetch_attributes(id)
         check_for_config!
-        get(base_url + "#{base_path}/#{id}", http_options).parsed_response
+        get(base_url + "#{base_path}/#{id}", http_options).parsed_response or raise APIError, 'No data returned by API'
       end
 
       def fetch_all_data(query_options = {})
         check_for_config!
         query_options = { per_page: per_page }.merge(query_options)
         url = base_url + base_path + '?' + hash_to_query(query_options)
-        get(url, http_options).parsed_response
+        get(url, http_options).parsed_response or raise APIError, 'No data returned by API'
       end
 
       def check_for_config!
@@ -279,5 +279,8 @@ module Chord
   end
 
   class ConfigurationError < StandardError
+  end
+
+  class APIError < StandardError
   end
 end
