@@ -125,7 +125,7 @@ module Chord
     end
 
     def update(new_attributes)
-      new_attributes.stringify_keys!
+      new_attributes.transform_keys!(&:to_s)
       # merge values into existing metadata
       if new_attributes.include?('metadata')
         # Chord expects all metadata values to be strings
