@@ -77,3 +77,7 @@ Both config-loading methods return a boolean indicating whether configuration da
 
     Chord.config_from_env or Chord.config_from_file('chord_config.yml')
 
+
+# To Do
+
+* tests should use mocks instead of real API requests
