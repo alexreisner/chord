@@ -274,6 +274,13 @@ module Chord
     end
   end
 
+  class Variant < Base
+
+    def self.base_path
+      'variants'
+    end
+  end
+
   class ConfigurationError < StandardError
   end
 
