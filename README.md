@@ -7,7 +7,7 @@ These classes provide simple read and write access to the Chord OMS API. Get sta
       api_key: '<key>'
     )
 
-    u = Chord::User.find(1)                   # fetch user
+    u = Chord::User.find(1)                   # fetch user by ID
     u.email                                   # view an attribute
     u.attributes                              # see all attributes (returns hash)
     u.update(name: 'Joe Smith', notes: 'Etc') # update attributes
@@ -16,7 +16,7 @@ These classes provide simple read and write access to the Chord OMS API. Get sta
     u.orders                                  # fetch the user's orders
     u.subscriptions                           # fetch the user's subscriptions
 
-    o = Chord::Order.find(1)                  # fetch order
+    o = Chord::Order.find('R87234695')        # fetch order by ID
     o.subscription_installment?               # was the order a subscription installment?
     o.subscription_start?                     # did the order start a subscription?
 
@@ -29,12 +29,10 @@ The most basic way to get a collection of objects:
 
     Chord::Order.all
 
-You can also filter and sort, though the parameters are not well documented:
+You can also filter results by using `where`:
 
-    Chord::Order.where(
-      'q[completed_at_gt]' => '2022-09-14',
-      'q[s]' => 'completed_at desc'
-    )
+    Chord::Order.where('q[completed_at_gt]' => '2022-09-14')
+    Chord::User.where('q[spree_roles_id_in]' => 8)
 
 
 ## Object attributes
@@ -51,7 +49,7 @@ will return a Chord::Order object with around 40 attributes, not the full set of
 
 # Configuration options
 
-To get your sensitive config data out of your code, you can put it in a YAML file, like so:
+To get configuration data out of your code, put it in a YAML file, like so:
 
     # chord_config.yml
     base_url: https://...
@@ -61,7 +59,7 @@ and load it by calling:
 
     Chord.config_from_file('chord_config.yml')
 
-Or you can put your configuration in environment variables:
+Or put your config in environment variables:
 
     CHORD_BASE_URL=https://...
     CHORD_API_KEY=...
@@ -78,3 +76,4 @@ Both config-loading methods return a boolean indicating whether configuration da
 # To Do
 
 * tests should use mocks instead of real API requests
+* support more objects and methods
