@@ -2,6 +2,11 @@
 
 Major changes for each release. Please see the Git log for complete list of changes.
 
+## 0.0.8
+
+* Don't preserve existing attributes when calling `expand!`.
+* Add User#orders method.
+
 ## 0.0.7
 
 * Remove ActiveRecord dependency.
