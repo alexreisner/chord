@@ -153,32 +153,6 @@ module Chord
 
   class User < Base
 
-    #
-    # For avoiding API calls.
-    #
-    def self.all_by_id
-      unless @all_by_id
-        @all_by_id = {}
-        all.each do |u|
-          @all_by_id[u.id] = u
-        end
-      end
-      @all_by_id
-    end
-
-    #
-    # For mapping users on our old site to Chord.
-    #
-    def self.all_by_email
-      unless @all_by_email
-        @all_by_email = {}
-        all.each do |u|
-          @all_by_email[u.email] = u
-        end
-      end
-      @all_by_email
-    end
-
     def self.base_path
       'users'
     end
