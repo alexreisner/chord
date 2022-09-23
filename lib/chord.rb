@@ -137,8 +137,7 @@ module Chord
     # fetch all attributes, but don't overwrite existing ones,
     # in case changes have been made
     def expand!
-      all_attributes = self.class.send(:fetch_attributes, id)
-      @attributes = all_attributes.merge(@attributes)
+      self.attributes = self.class.send(:fetch_attributes, id)
     end
 
     def method_missing(method, *args, &block)
