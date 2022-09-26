@@ -125,9 +125,14 @@ module Chord
     end
 
     def update(new_attributes)
-      self.attributes = self.class.patch(base_url + "#{base_path}/#{id}",
+      response = self.class.patch(base_url + "#{base_path}/#{id}",
         http_options.merge(body: new_attributes.to_json)
       ).parsed_response
+      if response.include?('error')
+        raise APIError, "Chord API error (status #{response['status']}): #{response['error']}"
+      else
+        self.attributes = response
+      end
     end
 
     def delete
