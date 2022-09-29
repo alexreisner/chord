@@ -193,6 +193,10 @@ module Chord
       'number'
     end
 
+    def complete?
+      state == 'complete'
+    end
+
     def user
       @user ||= Chord::User.find(attributes['user_id'])
     end
