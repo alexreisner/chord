@@ -117,7 +117,7 @@ module Chord
     end
 
     attr_reader :id
-    attr_accessor :attributes
+    attr_reader :attributes
 
     def initialize(id, attributes = {})
       @id = id
@@ -131,7 +131,7 @@ module Chord
       if response.include?('error')
         raise APIError, "Chord API error (status #{response['status']}): #{response['error']}"
       else
-        self.attributes = response
+        @attributes = response
       end
     end
 
@@ -142,7 +142,7 @@ module Chord
     # fetch all attributes, but don't overwrite existing ones,
     # in case changes have been made
     def expand!
-      self.attributes = self.class.send(:fetch_attributes, id)
+      @attributes = self.class.send(:fetch_attributes, id)
     end
 
     def method_missing(method, *args, &block)
