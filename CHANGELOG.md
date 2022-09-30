@@ -2,6 +2,11 @@
 
 Major changes for each release. Please see the Git log for complete list of changes.
 
+## 0.0.10
+
+* Don't allow public writing of @attributes.
+* Add Order#complete? method.
+
 ## 0.0.9
 
 * When API error on update, don't update object attributes.
