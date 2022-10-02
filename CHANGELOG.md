@@ -2,6 +2,10 @@
 
 Major changes for each release. Please see the Git log for complete list of changes.
 
+## 0.0.11
+
+* Add LineItem model (rough/WIP).
+
 ## 0.0.10
 
 * Don't allow public writing of @attributes.
