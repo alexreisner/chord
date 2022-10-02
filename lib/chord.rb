@@ -193,6 +193,10 @@ module Chord
       'number'
     end
 
+    def line_items
+      @attributes['line_items'].map{ |i| LineItem.new(i['id'], i) }
+    end
+
     def complete?
       state == 'complete'
     end
@@ -222,6 +226,14 @@ module Chord
     def subscription_start?
       expand! unless attributes.include?('subscription_in_cart')
       subscription_in_cart
+    end
+  end
+
+
+  class LineItem < Base
+
+    def subscription?
+      subscription_line_items.size > 0
     end
   end
 
