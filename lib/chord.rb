@@ -174,7 +174,7 @@ module Chord
     end
 
     def subscriptions
-      self.class.get(base_url + "users/#{id}/subscriptions", http_options).parsed_response['subscriptions'].map{ |s| Chord::Subscription.new(s['id'], s) }
+      self.class.get(base_url + "/subscriptions?q[user_id_in]=#{id}", http_options).parsed_response['subscriptions'].map{ |s| Chord::Subscription.new(s['id'], s) }
     end
 
     def find_subscription(subscription_id)
