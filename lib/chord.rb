@@ -194,6 +194,7 @@ module Chord
     end
 
     def line_items
+      expand! if @attributes['line_items'].nil?
       @attributes['line_items'].map{ |i| LineItem.new(i['id'], i) }
     end
 
