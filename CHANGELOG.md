@@ -2,6 +2,11 @@
 
 Major changes for each release. Please see the Git log for complete list of changes.
 
+## 0.0.12
+
+* New endpoint to work around API bug.
+* Auto-expand Order if needed for line items.
+
 ## 0.0.11
 
 * Add LineItem model (rough/WIP).
